@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DisMix: audio samples</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        .warning-note {
+        background-color: #ffcccb; /* Light red background */
+        color: #a94442; /* Darker red text */
+        padding: 15px;
+        border: 2px solid #a94442; /* Border matching the text color */
+        border-radius: 5px;
+        font-weight: bold;
+        font-size: 1.2em;
+        text-align: center;
+        margin: 20px 0; /* Adds space above and below */
+        }
+        .description {
+            max-width: 1500px; /* Adjust this value to your desired width */
+            text-align: left; /* Center the text within the paragraph */
+            font-size: 1.1em; /* Adjust the font size as needed */
+            color: #555; /* Optional: change the text color */
+        }
+        .tabs {
+            overflow: hidden;
+            background-color: #f1f1f1;
+            border-bottom: 1px solid #ccc;
+        }
+        .tabs button {
+            background-color: inherit;
+            float: left;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            padding: 14px 16px;
+            transition: 0.3s;
+            font-size: 17px;
+        }
+        .tabs button:hover {
+            background-color: #ddd;
+        }
+        .tabs button.active {
+            background-color: #0d0d0e;
+            color: white;
+        }
+        .tab-content {
+            display: none;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-top: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        table {
+            width: 70%;
+            border-collapse: collapse;
+            table-layout: fixed;
+            margin-bottom: 20px;
+        }
+        th, td {
+            padding: 10px;
+            text-align: center;
+            border: 1px solid #dddddd;
+        }
+        th {
+            background-color: #0d0d0e;
+            color: white;
+        }
+        audio {
+            width: 100%;
+            height: 30px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>DisMix: Audio samples</h1>
+    <p class="description">
+        Given a multi-instrument mixture and query samples, our model, DisMix, extracts and represents individual instruments by a pair of pitch and timbre representations.
+        The two representations act as modular components that can be swapped between instruments to render new audio samples.
+        In the following, we provide random, non cherry-picked, audio samples of the original mixture and the rendered samples by swapping the pitch and timbre representations of instruments between and within mixtures.
+    </p>
+
+    <div class="tabs">
+        <button class="tab-link active" onclick="openTab(event, 'between-mixture')">Between-mixture</button>
+        <button class="tab-link" onclick="openTab(event, 'within-mixture')">Within-mixture</button>
+        <button class="tab-link" onclick="openTab(event, 'source exchange')">Source exchange</button>
+    </div>
+
+    <!-- Tab content: Between-mixture -->
+    <div id="between-mixture" class="tab-content active">
+
+        <!-- Group 1 -->
+        <h2>Between-mixture instrument swapping</h2>
+        <p class="description">
+            Define the reference and target instruments across different mixtures.
+            The reference and target instruments share the same pitch range but have different timbre characteristics.
+        </p>
+        <table>
+            <thead>
+                <tr>
+                    <th>mixture</th>
+                    <th>trumpet &rarr; flute</th>
+                    <th>violin &rarr; viola</th>
+                    <th>viola &rarr; saxophone</th>
+                    <th>double bass &rarr; bassoon</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><audio class="audio-control" controls><source src="audio/group1/original_mixture.wav" type="audio/wav"></audio></td>
+                    <td><audio class="audio-control" controls><source src="audio/group1/original_source_1_trumpet.wav" type="audio/wav"></audio></td>
+                    <td><audio class="audio-control" controls><source src="audio/group1/original_source_2_violin.wav" type="audio/wav"></audio></td>
+                    <td><audio class="audio-control" controls><source src="audio/group1/original_source_3_viola.wav" type="audio/wav"></audio></td>
+                    <td><audio class="audio-control" controls><source src="audio/group1/original_source_4_db.wav" type="audio/wav"></audio></td>
+                </tr>
+                <tr>
+                    <td><audio class="audio-control" controls><source src="audio/group1/permutation_mixture.wav" type="audio/wav"></audio></td>
+                    <td><audio class="audio-control" controls><source src="audio/group1/permutation_source_1_flute.wav" type="audio/wav"></audio></td>
+                    <td><audio class="audio-control" controls><source src="audio/group1/permutation_source_2_viola.wav" type="audio/wav"></audio></td>
+                    <td><audio class="audio-control" controls><source src="audio/group1/permutation_source_3_sax.wav" type="audio/wav"></audio></td>
+                    <td><audio class="audio-control" controls><source src="audio/group1/permutation_source_4_bassoon.wav" type="audio/wav"></audio></td>
+                </tr>
+            </tbody>
+
+        <!-- Repeat the above block for Group 2 to Group 5 -->
+            <thead>
+                <tr>
+                    <th>mixture</th>
+                    <th>violin &rarr; clarinet</th>
+                    <th>trumpet &rarr; flute</th>
+                    <th>cello &rarr; saxophone</th>
+                    <th>tuba &rarr; tuba</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><audio class="audio-control" controls><source src="audio/group2/original_mixture.wav" type="audio/wav"></audio></td>
+                    <td><audio class="audio-control" controls><source src="audio/group2/original_source1_violin.wav" type="audio/wav"></audio></td>
+                    <td><audio class="audio-control" controls><source src="audio/group2/original_source2_trumpet.wav" type="audio/wav"></audio></td>
+                    <td><audio class="audio-control" controls><source src="audio/group2/original_source3_cello.wav" type="audio/wav"></audio></td>
+                    <td><audio class="audio-control" controls><source src="audio/group2/original_source4_tuba.wav" type="audio/wav"></audio></td>
+                </tr>
+                <tr>
+                    <td><audio class="audio-control" controls><source src="audio/group2/permutation_mixture.wav" type="audio/wav"></audio></td>
+                    <td><audio class="audio-control" controls><source src="audio/group2/permutation_source1_clarinet.wav" type="audio/wav"></audio></td>
+                    <td><audio class="audio-control" controls><source src="audio/group2/permutation_source2_flute.wav" type="audio/wav"></audio></td>
+                    <td><audio class="audio-control" controls><source src="audio/group2/permutation_source3_sax.wav" type="audio/wav"></audio></td>
+                    <td><audio class="audio-control" controls><source src="audio/group2/permutation_source4_tuba.wav" type="audio/wav"></audio></td>
+                </tr>
+            </tbody>
+
+            <thead>
+                <tr>
+                    <th>mixture</th>
+                    <th>trumpet &rarr; oboe</th>
+                    <th>violin &rarr; viola</th>
+                    <th>saxophone &rarr; trombone</th>
+                    <th>tuba &rarr; double bass</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><audio class="audio-control" controls><source src="audio/group5/original_mixture.wav" type="audio/wav"></audio></td>
+                    <td><audio class="audio-control" controls><source src="audio/group5/original_source1_trumpet.wav" type="audio/wav"></audio></td>
+                    <td><audio class="audio-control" controls><source src="audio/group5/original_source2_violin.wav" type="audio/wav"></audio></td>
+                    <td><audio class="audio-control" controls><source src="audio/group5/original_source3_sax.wav" type="audio/wav"></audio></td>
+                    <td><audio class="audio-control" controls><source src="audio/group5/original_source4_tuba.wav" type="audio/wav"></audio></td>
+                </tr>
+                <tr>
+                    <td><audio class="audio-control" controls><source src="audio/group5/permutation_mixture.wav" type="audio/wav"></audio></td>
+                    <td><audio class="audio-control" controls><source src="audio/group5/permutation_source1_oboe.wav" type="audio/wav"></audio></td>
+                    <td><audio class="audio-control" controls><source src="audio/group5/permutation_source2_viola.wav" type="audio/wav"></audio></td>
+                    <td><audio class="audio-control" controls><source src="audio/group5/permutation_source3_trombone.wav" type="audio/wav"></audio></td>
+                    <td><audio class="audio-control" controls><source src="audio/group5/permutation_source4_doublebass.wav" type="audio/wav"></audio></td>
+                </tr>
+            </tbody>
+
+            <thead>
+                <tr>
+                    <th>mixture</th>
+                    <th>oboe &rarr; flute</th>
+                    <th>saxophone &rarr; trumpet</th>
+                    <th>viola &rarr; saxophone</th>
+                    <th>cello &rarr; cello</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><audio class="audio-control" controls><source src="audio/group6/original_mixture.wav" type="audio/wav"></audio></td>
+                    <td><audio class="audio-control" controls><source src="audio/group6/original_source1_oboe.wav" type="audio/wav"></audio></td>
+                    <td><audio class="audio-control" controls><source src="audio/group6/original_source2_sax.wav" type="audio/wav"></audio></td>
+                    <td><audio class="audio-control" controls><source src="audio/group6/original_source3_viola.wav" type="audio/wav"></audio></td>
+                    <td><audio class="audio-control" controls><source src="audio/group6/original_source4_cello.wav" type="audio/wav"></audio></td>
+                </tr>
+                <tr>
+                    <td><audio class="audio-control" controls><source src="audio/group6/permutation_mixture.wav" type="audio/wav"></audio></td>
+                    <td><audio class="audio-control" controls><source src="audio/group6/permutation_source1_flute.wav" type="audio/wav"></audio></td>
+                    <td><audio class="audio-control" controls><source src="audio/group6/permutation_source2_trumpet.wav" type="audio/wav"></audio></td>
+                    <td><audio class="audio-control" controls><source src="audio/group6/permutation_source3_sax.wav" type="audio/wav"></audio></td>
+                    <td><audio class="audio-control" controls><source src="audio/group6/permutation_source4_cello.wav" type="audio/wav"></audio></td>
+                </tr>
+            </tbody>
+
+            <thead>
+                <tr>
+                    <th>mixture</th>
+                    <th>oboe &rarr; trumpet</th>
+                    <th>viola &rarr; violin</th>
+                    <th>trombone &rarr; saxophone</th>
+                    <th>double bass&rarr; tuba</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><audio class="audio-control" controls><source src="audio/group7/original_mixture.wav" type="audio/wav"></audio></td>
+                    <td><audio class="audio-control" controls><source src="audio/group7/original_source1_oboe.wav" type="audio/wav"></audio></td>
+                    <td><audio class="audio-control" controls><source src="audio/group7/original_source2_viola.wav" type="audio/wav"></audio></td>
+                    <td><audio class="audio-control" controls><source src="audio/group7/original_source3_trombone.wav" type="audio/wav"></audio></td>
+                    <td><audio class="audio-control" controls><source src="audio/group7/original_source4_doublebass.wav" type="audio/wav"></audio></td>
+                </tr>
+                <tr>
+                    <td><audio class="audio-control" controls><source src="audio/group7/permutation_mixture.wav" type="audio/wav"></audio></td>
+                    <td><audio class="audio-control" controls><source src="audio/group7/permutation_source1_trumpet.wav" type="audio/wav"></audio></td>
+                    <td><audio class="audio-control" controls><source src="audio/group7/permutation_source2_violin.wav" type="audio/wav"></audio></td>
+                    <td><audio class="audio-control" controls><source src="audio/group7/permutation_source3_sax.wav" type="audio/wav"></audio></td>
+                    <td><audio class="audio-control" controls><source src="audio/group7/permutation_source4_tuba.wav" type="audio/wav"></audio></td>
+                </tr>
+            </tbody>
+
+            <thead>
+                <tr>
+                    <th>mixture</th>
+                    <th>flute &rarr; oboe</th>
+                    <th>trumpet &rarr; trumpet</th>
+                    <th>saxophone &rarr; trombone</th>
+                    <th>cello &rarr; double bass</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><audio class="audio-control" controls><source src="audio/group8/original_mixture.wav" type="audio/wav"></audio></td>
+                    <td><audio class="audio-control" controls><source src="audio/group8/original_source1_flute.wav" type="audio/wav"></audio></td>
+                    <td><audio class="audio-control" controls><source src="audio/group8/original_source2_trumpet.wav" type="audio/wav"></audio></td>
+                    <td><audio class="audio-control" controls><source src="audio/group8/original_source3_sax.wav" type="audio/wav"></audio></td>
+                    <td><audio class="audio-control" controls><source src="audio/group8/original_source4_cello.wav" type="audio/wav"></audio></td>
+                </tr>
+                <tr>
+                    <td><audio class="audio-control" controls><source src="audio/group8/permutation_mixture.wav" type="audio/wav"></audio></td>
+                    <td><audio class="audio-control" controls><source src="audio/group8/permutation_source1_oboe.wav" type="audio/wav"></audio></td>
+                    <td><audio class="audio-control" controls><source src="audio/group8/permutation_source2_trumpet.wav" type="audio/wav"></audio></td>
+                    <td><audio class="audio-control" controls><source src="audio/group8/permutation_source3_trombone.wav" type="audio/wav"></audio></td>
+                    <td><audio class="audio-control" controls><source src="audio/group8/permutation_source4_doublebass.wav" type="audio/wav"></audio></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div id="within-mixture" class="tab-content">
+        <h2>Within-mixture instrument swapping</h2>
+        <p class="description">
+            Define the reference and target instruments within the same mixture.
+            The reference and target instruments could have different pitch ranges.
+        </p>
+        <table>
+            <thead>
+                <tr>
+                    <th>mixture</th>
+                    <th>violin &rarr; trombone</th>
+                    <th>viola &rarr; cello</th>
+                    <th>trombone &rarr; viola</th>
+                    <th>cello &rarr; violin</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><audio class="audio-control" controls><source src="audio/group3/original_mixture.wav" type="audio/wav"></audio></td>
+                    <td><audio class="audio-control" controls><source src="audio/group3/original_source_1_violin.wav" type="audio/wav"></audio></td>
+                    <td><audio class="audio-control" controls><source src="audio/group3/original_source_2_viola.wav" type="audio/wav"></audio></td>
+                    <td><audio class="audio-control" controls><source src="audio/group3/original_source_3_trombone.wav" type="audio/wav"></audio></td>
+                    <td><audio class="audio-control" controls><source src="audio/group3/original_source_4_cello.wav" type="audio/wav"></audio></td>
+                </tr>
+                <tr>
+                    <td><audio class="audio-control" controls><source src="audio/group3/permutation_mixture.wav" type="audio/wav"></audio></td>
+                    <td><audio class="audio-control" controls><source src="audio/group3/permutation_source_1_trombone.wav" type="audio/wav"></audio></td>
+                    <td><audio class="audio-control" controls><source src="audio/group3/permutation_source_2_cello.wav" type="audio/wav"></audio></td>
+                    <td><audio class="audio-control" controls><source src="audio/group3/permutation_source_3_viola.wav" type="audio/wav"></audio></td>
+                    <td><audio class="audio-control" controls><source src="audio/group3/permutation_source_4_violin.wav" type="audio/wav"></audio></td>
+                </tr>
+            </tbody>
+
+            <thead>
+                <tr>
+                    <th>mixture</th>
+                    <th>oboe &rarr; clarinet</th>
+                    <th>clarinet &rarr; cello</th>
+                    <th>cello &rarr; double bass</th>
+                    <th>double bass &rarr; oboe</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><audio class="audio-control" controls><source src="audio/group4/original_mixture.wav" type="audio/wav"></audio></td>
+                    <td><audio class="audio-control" controls><source src="audio/group4/original_source_1_oboe.wav" type="audio/wav"></audio></td>
+                    <td><audio class="audio-control" controls><source src="audio/group4/original_source_2_clarinet.wav" type="audio/wav"></audio></td>
+                    <td><audio class="audio-control" controls><source src="audio/group4/original_source_3_cello.wav" type="audio/wav"></audio></td>
+                    <td><audio class="audio-control" controls><source src="audio/group4/original_source_4_doublebass.wav" type="audio/wav"></audio></td>
+                </tr>
+                <tr>
+                    <td><audio class="audio-control" controls><source src="audio/group4/permutation_mixture.wav" type="audio/wav"></audio></td>
+                    <td><audio class="audio-control" controls><source src="audio/group4/permutation_source_1_clarinet.wav" type="audio/wav"></audio></td>
+                    <td><audio class="audio-control" controls><source src="audio/group4/permutation_source_2_cello.wav" type="audio/wav"></audio></td>
+                    <td><audio class="audio-control" controls><source src="audio/group4/permutation_source_3_doublebass.wav" type="audio/wav"></audio></td>
+                    <td><audio class="audio-control" controls><source src="audio/group4/permutation_source_4_oboe.wav" type="audio/wav"></audio></td>
+                </tr>
+            </tbody>
+
+            <thead>
+                <tr>
+                    <th>mixture</th>
+                    <th>trumpet &rarr; violin</th>
+                    <th>violin &rarr; saxophone</th>
+                    <th>saxophone &rarr; tuba</th>
+                    <th>tuba &rarr; trumpet</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><audio class="audio-control" controls><source src="audio/group9/original_mixture.wav" type="audio/wav"></audio></td>
+                    <td><audio class="audio-control" controls><source src="audio/group9/original_source1_trumpet.wav" type="audio/wav"></audio></td>
+                    <td><audio class="audio-control" controls><source src="audio/group9/original_source2_violin.wav" type="audio/wav"></audio></td>
+                    <td><audio class="audio-control" controls><source src="audio/group9/original_source3_sax.wav" type="audio/wav"></audio></td>
+                    <td><audio class="audio-control" controls><source src="audio/group9/original_source4_tuba.wav" type="audio/wav"></audio></td>
+                </tr>
+                <tr>
+                    <td><audio class="audio-control" controls><source src="audio/group9/permutation_mixture.wav" type="audio/wav"></audio></td>
+                    <td><audio class="audio-control" controls><source src="audio/group9/permutation_source1_violin.wav" type="audio/wav"></audio></td>
+                    <td><audio class="audio-control" controls><source src="audio/group9/permutation_source2_sax.wav" type="audio/wav"></audio></td>
+                    <td><audio class="audio-control" controls><source src="audio/group9/permutation_source3_tuba.wav" type="audio/wav"></audio></td>
+                    <td><audio class="audio-control" controls><source src="audio/group9/permutation_source4_trumpet.wav" type="audio/wav"></audio></td>
+                </tr>
+            </tbody>
+
+            <thead>
+                <tr>
+                    <th>mixture</th>
+                    <th>oboe &rarr; trumpet</th>
+                    <th>trumpet &rarr; oboe</th>
+                    <th>trombone &rarr; double bass</th>
+                    <th>double bass&rarr; trombone</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><audio class="audio-control" controls><source src="audio/group10/original_mixture.wav" type="audio/wav"></audio></td>
+                    <td><audio class="audio-control" controls><source src="audio/group10/original_source1_oboe.wav" type="audio/wav"></audio></td>
+                    <td><audio class="audio-control" controls><source src="audio/group10/original_source2_trumpet.wav" type="audio/wav"></audio></td>
+                    <td><audio class="audio-control" controls><source src="audio/group10/original_source3_trombone.wav" type="audio/wav"></audio></td>
+                    <td><audio class="audio-control" controls><source src="audio/group10/original_source4_doublebass.wav" type="audio/wav"></audio></td>
+                </tr>
+                <tr>
+                    <td><audio class="audio-control" controls><source src="audio/group10/permutation_mixture.wav" type="audio/wav"></audio></td>
+                    <td><audio class="audio-control" controls><source src="audio/group10/permutation_source1_trumpet.wav" type="audio/wav"></audio></td>
+                    <td><audio class="audio-control" controls><source src="audio/group10/permutation_source2_oboe.wav" type="audio/wav"></audio></td>
+                    <td><audio class="audio-control" controls><source src="audio/group10/permutation_source3_doublebass.wav" type="audio/wav"></audio></td>
+                    <td><audio class="audio-control" controls><source src="audio/group10/permutation_source4_trombone.wav" type="audio/wav"></audio></td>
+                </tr>
+            </tbody>
+
+            <thead>
+                <tr>
+                    <th>mixture</th>
+                    <th>flute &rarr; cello</th>
+                    <th>trumpet &rarr; trumpet</th>
+                    <th>saxophone &rarr; flute</th>
+                    <th>cello &rarr; saxophone</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><audio class="audio-control" controls><source src="audio/group11/original_mixture.wav" type="audio/wav"></audio></td>
+                    <td><audio class="audio-control" controls><source src="audio/group11/original_source1_flute.wav" type="audio/wav"></audio></td>
+                    <td><audio class="audio-control" controls><source src="audio/group11/original_source2_trumpet.wav" type="audio/wav"></audio></td>
+                    <td><audio class="audio-control" controls><source src="audio/group11/original_source3_sax.wav" type="audio/wav"></audio></td>
+                    <td><audio class="audio-control" controls><source src="audio/group11/original_source4_cello.wav" type="audio/wav"></audio></td>
+                </tr>
+                <tr>
+                    <td><audio class="audio-control" controls><source src="audio/group11/permutation_mixture.wav" type="audio/wav"></audio></td>
+                    <td><audio class="audio-control" controls><source src="audio/group11/permutation_source1_cello.wav" type="audio/wav"></audio></td>
+                    <td><audio class="audio-control" controls><source src="audio/group11/permutation_source2_trumpet.wav" type="audio/wav"></audio></td>
+                    <td><audio class="audio-control" controls><source src="audio/group11/permutation_source3_flute.wav" type="audio/wav"></audio></td>
+                    <td><audio class="audio-control" controls><source src="audio/group11/permutation_source4_sax.wav" type="audio/wav"></audio></td>
+                </tr>
+            </tbody>
+
+            <thead>
+                <tr>
+                    <th>mixture</th>
+                    <th>clarinet &rarr; saxophone</th>
+                    <th>trumpet &rarr; double bass</th>
+                    <th>saxophone &rarr; clarinet</th>
+                    <th>double bass&rarr; trumpet</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><audio class="audio-control" controls><source src="audio/group12/original_mixture.wav" type="audio/wav"></audio></td>
+                    <td><audio class="audio-control" controls><source src="audio/group12/original_source1_clarinet.wav" type="audio/wav"></audio></td>
+                    <td><audio class="audio-control" controls><source src="audio/group12/original_source2_trumpet.wav" type="audio/wav"></audio></td>
+                    <td><audio class="audio-control" controls><source src="audio/group12/original_source3_sax.wav" type="audio/wav"></audio></td>
+                    <td><audio class="audio-control" controls><source src="audio/group12/original_source4_doublebass.wav" type="audio/wav"></audio></td>
+                </tr>
+                <tr>
+                    <td><audio class="audio-control" controls><source src="audio/group12/permutation_mixture.wav" type="audio/wav"></audio></td>
+                    <td><audio class="audio-control" controls><source src="audio/group12/permutation_source1_sax.wav" type="audio/wav"></audio></td>
+                    <td><audio class="audio-control" controls><source src="audio/group12/permutation_source2_doublebass.wav" type="audio/wav"></audio></td>
+                    <td><audio class="audio-control" controls><source src="audio/group12/permutation_source3_clarinet.wav" type="audio/wav"></audio></td>
+                    <td><audio class="audio-control" controls><source src="audio/group12/permutation_source4_trumpet.wav" type="audio/wav"></audio></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div id="source exchange" class="tab-content">
+        <h2>Source exchange between mixtures</h2>
+        <p class="description">
+            Exchange sources between different mixtures by swapping individual source-level latents across different mixtures.
+            One part of the SATB parts is separated or isolated from the original mixture and replaced with that part from the other mixture.
+        </p>
+        <table>
+            <thead>
+                <tr>
+                    <th>original mixture</th>
+                    <th>isolation (S)</th>
+                    <th>removal (ATB)</th>
+                    <th>replacement (S'ATB)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><audio class="audio-control" controls><source src="audio/exchange/group1/xm_original-0.wav" type="audio/wav"></audio></td>
+                    <td><audio class="audio-control" controls><source src="audio/exchange/group1/xm_i-0.wav" type="audio/wav"></audio></td>
+                    <td><audio class="audio-control" controls><source src="audio/exchange/group1/xm_remain-0.wav" type="audio/wav"></audio></td>
+                    <td><audio class="audio-control" controls><source src="audio/exchange/group1/xm_swap-0.wav" type="audio/wav"></audio></td>
+                </tr>
+                <tr>
+                    <td><audio class="audio-control" controls><source src="audio/exchange/group1/xm_original-1.wav" type="audio/wav"></audio></td>
+                    <td><audio class="audio-control" controls><source src="audio/exchange/group1/xm_i-1.wav" type="audio/wav"></audio></td>
+                    <td><audio class="audio-control" controls><source src="audio/exchange/group1/xm_remain-1.wav" type="audio/wav"></audio></td>
+                    <td><audio class="audio-control" controls><source src="audio/exchange/group1/xm_swap-1.wav" type="audio/wav"></audio></td>
+                </tr>
+            </tbody>
+
+            <thead>
+                <tr>
+                    <th>original mixture</th>
+                    <th>isolation (B)</th>
+                    <th>removal (SAT)</th>
+                    <th>replacement (SATB')</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><audio class="audio-control" controls><source src="audio/exchange/group2/xm_original-0.wav" type="audio/wav"></audio></td>
+                    <td><audio class="audio-control" controls><source src="audio/exchange/group2/xm_i-0.wav" type="audio/wav"></audio></td>
+                    <td><audio class="audio-control" controls><source src="audio/exchange/group2/xm_remain-0.wav" type="audio/wav"></audio></td>
+                    <td><audio class="audio-control" controls><source src="audio/exchange/group2/xm_swap-0.wav" type="audio/wav"></audio></td>
+                </tr>
+                <tr>
+                    <td><audio class="audio-control" controls><source src="audio/exchange/group2/xm_original-1.wav" type="audio/wav"></audio></td>
+                    <td><audio class="audio-control" controls><source src="audio/exchange/group2/xm_i-1.wav" type="audio/wav"></audio></td>
+                    <td><audio class="audio-control" controls><source src="audio/exchange/group2/xm_remain-1.wav" type="audio/wav"></audio></td>
+                    <td><audio class="audio-control" controls><source src="audio/exchange/group2/xm_swap-1.wav" type="audio/wav"></audio></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        function openTab(evt, tabName) {
+            var i, tabcontent, tablinks;
+
+            // Hide all tab content
+            tabcontent = document.getElementsByClassName("tab-content");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+
+            // Remove the active class from all tablinks
+            tablinks = document.getElementsByClassName("tab-link");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+
+            // Show the current tab and add an "active" class to the clicked tab
+            document.getElementById(tabName).style.display = "block";
+            evt.currentTarget.className += " active";
+        }
+
+        // Set the first tab to be displayed by default
+        document.getElementById("between-mixture").style.display = "block";
+    </script>
+
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Get all audio elements with the class 'audio-control'
+            var audioElements = document.querySelectorAll('.audio-control');
+            
+            // Set the volume of each audio element to 50%
+            audioElements.forEach(function(audio) {
+                audio.volume = 0.1; // 50% loudness
+            });
+        });
+    </script>
+
+</body>
+</html>
